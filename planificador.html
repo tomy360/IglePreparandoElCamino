@@ -5,29 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>if(localStorage.getItem('recetario-modo-noche')==='1')document.documentElement.classList.add('modo-noche')</script>
   <style>body{background:#FDF8F0}html.modo-noche body{background:#1a1f12}</style>
+  <title>Planificador — Recetas del día</title>
   <link rel="stylesheet" href="./CSS/estilo.css">
   <link rel="stylesheet" href="./CSS/auth.css">
   <style>.nav-cta,.nav-mobile-cta{display:none}</style>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
-  <title>Consejos de cocina — Recetas del día</title>
   <script defer src="./JS/supabase.js?v=2"></script>
   <script defer src="./JS/datos.js?v=2"></script>
   <script defer src="./JS/db.js?v=2"></script>
   <script defer src="./JS/timer.js?v=2"></script>
   <script defer src="./JS/auth.js?v=2"></script>
-  <script defer src="./JS/emojis.js?v=2"></script>
-  <script defer src="./JS/consejos.js?v=2"></script>
+  <script defer src="./JS/planificador.js?v=2"></script>
 </head>
 <body>
 
-<nav>
+<nav class="nav">
   <div class="nav-inner">
-
     <a class="nav-logo" href="./index.html">
       <img src="Imagenes/Logo-01.png" class="nav-logo-img" alt="Recetas del día">
       <span>Recetas del día</span>
     </a>
-
     <div class="menu-botones">
       <div class="nav-dropdown">
         <a class="BotonBa" href="./index.html?tipo=Todos">🍽️ Comidas</a>
@@ -48,24 +44,19 @@
           <a class="BotonBa" href="javascript:void(0)" data-href="./index.html?dieta=Cel%C3%ADacos" data-nav-dieta="Celíacos">Celíacos</a>
         </div>
       </div>
-      <a class="BotonBa" href="./planificador.html">📅 Planificador</a>
-      <a class="BotonBa activo" href="./consejos.html">💡 Consejos</a>
+      <a class="BotonBa activo" href="./planificador.html">📅 Planificador</a>
+      <a class="BotonBa" href="./consejos.html">💡 Consejos</a>
       <a class="BotonBa" href="./pendientes.html">🗒️ Quiero hacer</a>
       <button class="nav-dark-btn nav-timer-btn" onclick="abrirTimer()" title="Abrir temporizador">⏲️</button>
       <button class="nav-dark-btn" id="btnModoNoche" aria-label="Activar modo noche" title="Modo noche">🌕</button>
       <a class="BotonBa" href="https://www.instagram.com/recetasdeldia_mdz/" target="_blank" rel="noopener">📷 Instagram</a>
     </div>
-
     <div class="nav-cta">
       <a class="BotonP" href="./agregar.html">+ Añadir Receta</a>
     </div>
-
     <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
-
   </div>
 
   <div class="nav-mobile-menu" id="navMobileMenu" role="navigation">
@@ -74,27 +65,13 @@
         <span class="nav-mobile-icon">🍽️</span> Comidas <span class="submenu-arrow">▾</span>
       </a>
       <div class="nav-mobile-submenu-items">
-        <a class="nav-mobile-link" href="./index.html?tipo=Desayuno">
-          <span class="nav-mobile-icon">☀️</span> Desayuno
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Almuerzo">
-          <span class="nav-mobile-icon">🥗</span> Almuerzo
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Cena">
-          <span class="nav-mobile-icon">🌙</span> Cena
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Media Tarde">
-          <span class="nav-mobile-icon">🕑</span> Media Tarde
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Indefinido">
-          <span class="nav-mobile-icon">❓</span> Indefinido
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Postre">
-          <span class="nav-mobile-icon">🍰</span> Postre
-        </a>
-        <a class="nav-mobile-link" href="./index.html?tipo=Acompa%C3%B1amiento">
-          <span class="nav-mobile-icon">🥬</span> Acompañamiento
-        </a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Desayuno"><span class="nav-mobile-icon">☀️</span> Desayuno</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Almuerzo"><span class="nav-mobile-icon">🥗</span> Almuerzo</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Cena"><span class="nav-mobile-icon">🌙</span> Cena</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Media Tarde"><span class="nav-mobile-icon">🕑</span> Media Tarde</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Indefinido"><span class="nav-mobile-icon">❓</span> Indefinido</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Postre"><span class="nav-mobile-icon">🍰</span> Postre</a>
+        <a class="nav-mobile-link" href="./index.html?tipo=Acompa%C3%B1amiento"><span class="nav-mobile-icon">🥬</span> Acompañamiento</a>
       </div>
     </div>
     <div class="nav-mobile-submenu">
@@ -110,18 +87,10 @@
         </a>
       </div>
     </div>
-    <a class="nav-mobile-link" href="./planificador.html">
-      <span class="nav-mobile-icon">📅</span> Planificador
-    </a>
-    <a class="nav-mobile-link activo" href="./consejos.html">
-      <span class="nav-mobile-icon">💡</span> Consejos
-    </a>
-    <a class="nav-mobile-link" href="./pendientes.html">
-      <span class="nav-mobile-icon">🗒️</span> Quiero hacer
-    </a>
-    <a class="nav-mobile-link" role="button" tabindex="0" onclick="abrirTimer()">
-      <span class="nav-mobile-icon">⏲️</span> Temporizador
-    </a>
+    <a class="nav-mobile-link activo" href="./planificador.html"><span class="nav-mobile-icon">📅</span> Planificador</a>
+    <a class="nav-mobile-link" href="./consejos.html"><span class="nav-mobile-icon">💡</span> Consejos</a>
+    <a class="nav-mobile-link" href="./pendientes.html"><span class="nav-mobile-icon">🗒️</span> Quiero hacer</a>
+    <a class="nav-mobile-link" role="button" tabindex="0" onclick="abrirTimer()"><span class="nav-mobile-icon">⏲️</span> Temporizador</a>
     <a class="nav-mobile-link" role="button" tabindex="0" id="btnModoNocheMobile">
       <span class="nav-mobile-icon" id="iconoModoNocheMobile">🌕</span> <span id="textoModoNocheMobile">Modo noche</span>
     </a>
@@ -137,80 +106,40 @@
 
 <div class="nav-overlay" id="navOverlay"></div>
 
-<div class="consejos-page">
-  <div class="consejos-toolbar">
-    <div>
-      <h1>💡 Consejos de cocina</h1>
-      <p style="color:var(--texto-suave);margin:0.25rem 0 0;">Notas, trucos y recomendaciones que vas descubriendo.</p>
+<div class="planificador-page">
+  <div class="encabezado">
+    <div class="encabezado-titulo">
+      <h1><span class="calendario-badge" id="calendarioBadge"><span class="cal-mes">ENE</span><span class="cal-dia">1</span></span> Planificador Semanal</h1>
+      <p>Organiza tus comidas para la semana.</p>
     </div>
-    <button class="consejos-toggle-btn oculto" id="btnToggleConsejo" title="Agregar consejo">+</button>
-  </div>
-
-  <div class="consejos-encabezado-filtros">
-    <div class="consejos-buscador">
-      <span class="consejos-buscador-icono">🔍</span>
-      <input type="text" id="buscadorConsejos" placeholder="Buscar consejos por título o contenido...">
-    </div>
-    <div class="consejos-filtros-botones">
-      <button class="btn-filtro" id="btnToggleCategorias">📂 Categorías de consejos</button>
-      <button class="btn-filtro" id="btnFavTips">⭐ Favoritos</button>
-    </div>
-    <div class="consejos-filtros-categoria oculto" id="filtrosCategoriaConsejo"></div>
-  </div>
-
-  <div class="consejos-form-wrapper oculto" id="consejosFormWrapper">
-    <div class="consejos-form" id="consejosForm">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 1rem;">
-        <h4 style="margin:0;">✏️ Nuevo consejo</h4>
-        <button id="btnCerrarConsejoForm" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--texto);padding:0;line-height:1;" title="Cerrar">✕</button>
-      </div>
-      <div class="form-campo">
-        <label for="campoTituloConsejo">Título</label>
-        <div class="toolbar-formato">
-          <button type="button" class="tf-btn" onclick="formatearTexto(document.getElementById('campoTituloConsejo'),'**','**')" title="Negrita (**)"><b>B</b></button>
-          <button type="button" class="tf-btn" onclick="formatearTexto(document.getElementById('campoTituloConsejo'),'__','__')" title="Subrayado (__)"><u>U</u></button>
-          <button type="button" class="tf-btn" onclick="formatearTexto(document.getElementById('campoTituloConsejo'),'• ','')" title="Lista">•</button>
-          <button type="button" class="tf-btn" onclick="abrirEmojiPopup('campoTituloConsejo')" title="Emojis">😀</button>
-        </div>
-        <input type="text" id="campoTituloConsejo" spellcheck="true" lang="es" autocorrect="on" placeholder="Ej: Cómo pelar ajos fácilmente" style="width:100%;padding:0.65rem 1rem;border:1px solid var(--borde);border-radius:0.75rem;font-size:0.9rem;outline:none;box-sizing:border-box;">
-      </div>
-      <div class="form-campo">
-        <label for="campoCategoriaConsejo">Categoría</label>
-        <select id="campoCategoriaConsejo" style="width:100%;padding:0.65rem 1rem;border:1px solid var(--borde);border-radius:0.75rem;font-size:0.9rem;outline:none;box-sizing:border-box;background:var(--blanco);color:var(--texto);">
-          <option value="">Sin categoría</option>
-        </select>
-      </div>
-      <div class="form-campo oculto">
-        <label for="campoNombreConsejo">Tu nombre</label>
-        <input type="text" id="campoNombreConsejo" placeholder="Tu nombre" style="width:100%;padding:0.65rem 1rem;border:1px solid var(--borde);border-radius:0.75rem;font-size:0.9rem;outline:none;box-sizing:border-box;">
-      </div>
-      <div class="form-campo">
-        <label for="campoContenidoConsejo">Contenido</label>
-        <div class="toolbar-formato">
-          <button type="button" class="tf-btn" data-tag="bold" title="Negrita (**)"><b>B</b></button>
-          <button type="button" class="tf-btn" data-tag="underline" title="Subrayado (__)"><u>U</u></button>
-          <button type="button" class="tf-btn" onclick="formatearTexto(document.getElementById('campoContenidoConsejo'),'• ','')" title="Lista">•</button>
-          <button type="button" class="tf-btn" onclick="abrirEmojiPopup('campoContenidoConsejo')" title="Emojis">😀</button>
-        </div>
-        <textarea id="campoContenidoConsejo" spellcheck="true" lang="es" autocorrect="on" placeholder="Escribe tu consejo aquí..."></textarea>
-      </div>
-      <div class="form-acciones">
-        <button class="btn-guardar" id="btnGuardarConsejo">💾 Guardar consejo</button>
-        <button class="btn-cancelar oculto" id="btnCancelarConsejo" type="button">Cancelar</button>
-      </div>
+    <div class="encabezado-acciones">
+      <button class="btn-filtro" id="btnLimpiarPlan">🗑️ Limpiar semana</button>
+      <button class="btn-filtro oculto" id="btnListaCompras">🛒 Lista de compras</button>
     </div>
   </div>
 
-  <div class="consejos-grid" id="consejosGrid"></div>
-  <p class="sin-resultados oculto" id="sinConsejos" style="text-align:center;padding:3rem;color:var(--texto-suave);">Aún no hay consejos. ¡Escribe el primero!</p>
+  <div class="planificador-grid" id="planificadorGrid">
+  </div>
+</div>
+
+<!-- LISTA DE COMPRAS MODAL -->
+<div class="modal oculto" id="modalListaCompras" onclick="if(event.target===this)cerrarListaCompras()">
+  <div class="modal-contenido modal-lista-compras">
+    <button class="modal-cerrar" onclick="cerrarListaCompras()">✕</button>
+    <h3>🛒 Lista de compras</h3>
+    <p class="ayuda">Según tu planificación semanal</p>
+    <div class="lista-compras-resultado" id="listaComprasResultado">
+      <p class="ayuda">Cargando...</p>
+    </div>
+  </div>
 </div>
 
 <!-- TIMER MODAL -->
 <div class="modal oculto" id="modalTimer" onclick="if(event.target===this)cerrarTimer()">
   <div class="modal-contenido modal-timer">
     <button class="modal-cerrar" onclick="cerrarTimer()">✕</button>
-    <h3>⏱️ Temporizador</h3>
-    <div class="timer-display" id="timerDisplay">10:00</div>
+      <h3>⏱️ Temporizador</h3>
+      <div class="timer-display" id="timerDisplay">10:00</div>
     <div class="timer-barra-track"><div class="timer-barra-fill" id="timerBarra" style="width:100%"></div></div>
     <div class="timer-acciones">
       <button class="btn-accion" id="timerBoton" onclick="toggleTimer()">▶</button>
@@ -257,9 +186,9 @@
 
 <button id="scrollTop" title="Volver arriba">↑</button>
 <script>
-const btn = document.getElementById("scrollTop");
-window.addEventListener("scroll", () => btn.classList.toggle("visible", window.scrollY > 300));
-btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+var btn = document.getElementById("scrollTop");
+window.addEventListener("scroll", function () { btn.classList.toggle("visible", window.scrollY > 300); });
+btn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
 </script>
 
 <script>
