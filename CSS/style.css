@@ -359,9 +359,25 @@ nav.nav-scrolled {
     font-weight: 600;
     font-style: italic;
     color: #5A7863;
-    margin: 6px 0 18px;
+    margin: 6px 0 0;
     font-size: 15px;
     letter-spacing: 0.3px;
+}
+
+.Devocional .dev-bloque {
+    margin: 22px 0;
+    padding: 16px 20px;
+    background: #EFF6E6;
+    border-left: 4px solid #90AB8B;
+    border-radius: 0 12px 12px 0;
+}
+
+.Devocional .dev-texto {
+    display: block;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 6px;
 }
 
 .Devocional .dev-oracion {
