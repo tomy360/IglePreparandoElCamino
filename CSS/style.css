@@ -461,6 +461,19 @@ nav.nav-scrolled {
     color: #3B4953;
 }
 
+.EventoFecha {
+    display: inline-block;
+    align-self: flex-start;
+    background: #5A7863;
+    color: #F8FAF4;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
 .EventoInfo ul {
     list-style: none;
     padding: 0;

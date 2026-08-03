@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="icon" type="image/png" href="./Imagenes/Iconos/Preparando.png">
+    <title>Preparando El Camino</title>
+</head>
+<body>
+
+<nav>
+    <img class="Logo" id="LogoP" src="./Imagenes/Iconos/Preparando.png" alt="Logo Preparando el Camino">
+    <div class="menu-botones">
+        <a class="BotonBa" href="./index.html">Inicio</a>
+        <a class="BotonBa" href="./Preparando.html">Iglesia</a>
+        <a class="BotonBa activo" href="./Noticias.html">Noticias</a>
+        <a class="BotonBa" href="./Emergente.html">Emergente social</a>
+    </div>
+    <img class="Logo" id="LogoE" src="./Imagenes/Iconos/Emergente.png" alt="Logo Centro Emergente">
+</nav>
+
+<div class="CartelPresent CartelInterna TextB">
+    <h2 class="TextP1" data-anim>Noticias y Eventos</h2>
+    <h3 class="TextP2" data-anim>Todo lo que está pasando en nuestra iglesia</h3>
+    <img class="ImagenPr ImagenIndex" src="./Imagenes/General.jpeg" alt="">
+</div>
+
+<div class="EventosEspeciales TextB" data-anim>
+    <h2>Últimas noticias</h2>
+    <div class="EventosEspecialesCont" id="NoticiasCont"></div>
+</div>
+
+<div class="separador"></div>
+
+<div class="Visitanos TextB" data-anim>
+    <h2>¡Te Esperamos!</h2>
+    <h3>Eres bienvenido a visitarnos cualquier sábado. <br>
+        Nuestra familia está lista para recibirte con los brazos abiertos.</h3>
+    <div class="VisitanosInterno">
+        <div class="VisitanosI">
+            <h2>Dirección:</h2>
+            <p>Juan B. Alberdi 135</p>
+        </div>
+        <div class="VisitanosI">
+            <h2>Contacto:</h2>
+            <p>Teléfono: (261) 596-0948</p>
+        </div>
+    </div>
+</div>
+
+<script src="./JS/eventos.js" defer></script>
+<script src="./JS/noticias.js" defer></script>
+<script src="./JS/animaciones.js" defer></script>
+<button id="scrollTop" title="Volver arriba">&#8593;</button>
+<script>
+const btn = document.getElementById("scrollTop");
+window.addEventListener("scroll", () => btn.classList.toggle("visible", window.scrollY > 300));
+btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>
+</body>
+</html>
