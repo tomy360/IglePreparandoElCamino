@@ -23,8 +23,35 @@
 <div class="CartelPresent CartelInterna TextB">
     <h2 class="TextP1" data-anim>Centro de Recuperación</h2>
     <h3 class="TextP2" data-anim>Hay esperanza, hay sanidad, hay un nuevo comienzo</h3>
-    <a class="BotonP activo" href="./Formulario.html" data-anim>Evaluacion Diaria</a>
+    <div class="BotonPair">
+        <a class="BotonP activo" href="./Formulario.html" data-anim>Evaluacion Diaria</a>
+        <a class="BotonP activo" id="btnCharla" data-anim>Charla</a>
+    </div>
     <img class="ImagenPr ImagenIndex" src="./Imagenes/General.jpeg" alt="">
+</div>
+
+<div class="popup-overlay" id="popupCharla">
+    <div class="popup-content">
+        <button class="popup-close" id="popupClose">&times;</button>
+        <h2 class="popup-title">Charla - Emergente Social</h2>
+
+        <div class="charla-carrusel" id="charlaCarrusel">
+            <img src="./Charlas/Emergente/1.png" alt="Diapositiva 1" class="carrusel-img active">
+            <img src="./Charlas/Emergente/2.png" alt="Diapositiva 2" class="carrusel-img">
+        </div>
+
+        <div class="charla-audio">
+            <button class="audio-play" id="audioPlay">&#9654;</button>
+            <div class="audio-info">
+                <span class="audio-titulo">Mi grabación 1</span>
+                <div class="audio-barra-container">
+                    <span class="audio-tiempo" id="audioTiempo">0:00</span>
+                    <input type="range" class="audio-barra" id="audioBarra" value="0" min="0" max="100">
+                    <span class="audio-tiempo" id="audioTotal">0:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="CartelPresentC TextB" data-anim>
@@ -209,6 +236,93 @@
 </div>
 
 <script src="./JS/animaciones.js" defer></script>
+<script>
+(function() {
+    const btnCharla = document.getElementById('btnCharla');
+    const popup = document.getElementById('popupCharla');
+    const popupClose = document.getElementById('popupClose');
+    const audioPlay = document.getElementById('audioPlay');
+    const audioBarra = document.getElementById('audioBarra');
+    const audioTiempo = document.getElementById('audioTiempo');
+    const audioTotal = document.getElementById('audioTotal');
+    const carrusel = document.getElementById('charlaCarrusel');
+    const imgs = carrusel.querySelectorAll('.carrusel-img');
+
+    const audio = new Audio('./Charlas/Emergente/Mi grabaci%C3%B3n%201.mp3');
+    let reproduciendo = false;
+    let indiceImg = 0;
+
+    function formato(s) {
+        s = Math.floor(s) || 0;
+        return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+
+    function abrirPopup() {
+        popup.classList.add('activo');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarPopup() {
+        popup.classList.remove('activo');
+        document.body.style.overflow = '';
+        audio.pause();
+        reproduciendo = false;
+        audioPlay.innerHTML = '&#9654;';
+    }
+
+    btnCharla.addEventListener('click', function(e) {
+        e.preventDefault();
+        abrirPopup();
+    });
+
+    popupClose.addEventListener('click', cerrarPopup);
+
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) cerrarPopup();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.classList.contains('activo')) cerrarPopup();
+    });
+
+    audioPlay.addEventListener('click', function() {
+        if (reproduciendo) {
+            audio.pause();
+            reproduciendo = false;
+            audioPlay.innerHTML = '&#9654;';
+        } else {
+            audio.play();
+            reproduciendo = true;
+            audioPlay.innerHTML = '&#9646;&#9646;';
+        }
+    });
+
+    audio.addEventListener('timeupdate', function() {
+        if (!isNaN(audio.duration)) {
+            audioBarra.max = Math.floor(audio.duration);
+            audioBarra.value = Math.floor(audio.currentTime);
+            audioTiempo.textContent = formato(audio.currentTime);
+            audioTotal.textContent = formato(audio.duration);
+        }
+    });
+
+    audioBarra.addEventListener('input', function() {
+        audio.currentTime = audioBarra.value;
+    });
+
+    audio.addEventListener('ended', function() {
+        reproduciendo = false;
+        audioPlay.innerHTML = '&#9654;';
+    });
+
+    setInterval(function() {
+        if (imgs.length <= 1) return;
+        imgs[indiceImg].classList.remove('active');
+        indiceImg = (indiceImg + 1) % imgs.length;
+        imgs[indiceImg].classList.add('active');
+    }, 4000);
+})();
+</script>
 <button id="scrollTop" title="Volver arriba">&#8593;</button>
 <script>
 const btn = document.getElementById("scrollTop");
