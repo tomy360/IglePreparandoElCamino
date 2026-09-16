@@ -1782,6 +1782,11 @@ nav.nav-scrolled {
     display: flex;
 }
 
+.popup-overlay.activo ~ #scrollTop {
+    opacity: 0;
+    visibility: hidden;
+}
+
 @keyframes popupZoomIn {
     0% { transform: scale(0.4); opacity: 0; }
     60% { transform: scale(1.02); opacity: 1; }
