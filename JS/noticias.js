@@ -21,6 +21,11 @@ function crearTarjetaEvento(evento) {
     img.src = evento.imagen;
     img.alt = evento.titulo;
     img.loading = "lazy";
+    img.style.cursor = "zoom-in";
+    img.title = "Click para ampliar";
+    img.addEventListener("click", function() {
+        abrirLightbox(evento.imagen);
+    });
     tarjeta.appendChild(img);
 
     const info = document.createElement("div");
@@ -84,4 +89,41 @@ function renderEventosTodos(id) {
 document.addEventListener("DOMContentLoaded", () => {
     renderEventosIndex("EventosEspecialesCont", 3);
     renderEventosTodos("NoticiasCont");
+});
+
+// ============================================
+//  LIGHTBOX (zoom de imagen de noticias)
+// ============================================
+
+let lightboxEl = null;
+
+function crearLightbox() {
+    lightboxEl = document.createElement("div");
+    lightboxEl.className = "lightbox";
+    document.body.appendChild(lightboxEl);
+    lightboxEl.addEventListener("click", cerrarLightbox);
+}
+
+function abrirLightbox(src) {
+    if (!lightboxEl) crearLightbox();
+    lightboxEl.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Imagen ampliada";
+    lightboxEl.appendChild(img);
+    lightboxEl.classList.add("activo");
+    document.body.style.overflow = "hidden";
+}
+
+function cerrarLightbox() {
+    if (!lightboxEl || !lightboxEl.classList.contains("activo")) return;
+    lightboxEl.classList.add("cerrando");
+    setTimeout(() => {
+        lightboxEl.classList.remove("activo", "cerrando");
+        document.body.style.overflow = "";
+    }, 250);
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") cerrarLightbox();
 });
