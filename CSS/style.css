@@ -456,8 +456,8 @@ nav.nav-scrolled {
 
 .EventoIndividual img {
     width: 100%;
-
-    object-fit: contain;
+    height: 240px;
+    object-fit: cover;
     display: block;
     background-color: #D6E2C7; /* placeholder cuando no hay imagen */
 }
