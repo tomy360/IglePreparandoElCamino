@@ -35,10 +35,7 @@
         <button class="popup-close" id="popupClose">&times;</button>
         <h2 class="popup-title">Charla - Emergente Social</h2>
 
-        <div class="charla-carrusel" id="charlaCarrusel">
-            <img src="./Charlas/Emergente/1.png" alt="Diapositiva 1" class="carrusel-img active">
-            <img src="./Charlas/Emergente/2.png" alt="Diapositiva 2" class="carrusel-img">
-        </div>
+        <div class="charla-carrusel" id="charlaCarrusel"></div>
 
         <div class="charla-audio">
             <button class="audio-play" id="audioPlay">&#9654;</button>
@@ -271,11 +268,27 @@
     const audioTiempo = document.getElementById('audioTiempo');
     const audioTotal = document.getElementById('audioTotal');
     const carrusel = document.getElementById('charlaCarrusel');
-    const imgs = carrusel.querySelectorAll('.carrusel-img');
+    let imgs = carrusel.querySelectorAll('.carrusel-img');
 
     const audio = new Audio('./Charlas/Emergente/Mi grabaci%C3%B3n%201.mp3');
     let reproduciendo = false;
     let indiceImg = 0;
+
+    fetch('/api/imagenes?carpeta=emergente')
+        .then(r => r.json())
+        .then(rutas => {
+            carrusel.innerHTML = '';
+            rutas.forEach((ruta, i) => {
+                const img = document.createElement('img');
+                img.src = ruta;
+                img.alt = 'Diapositiva ' + (i + 1);
+                img.className = 'carrusel-img' + (i === 0 ? ' active' : '');
+                carrusel.appendChild(img);
+            });
+            imgs = carrusel.querySelectorAll('.carrusel-img');
+            indiceImg = 0;
+        })
+        .catch(() => {});
 
     function formato(s) {
         s = Math.floor(s) || 0;
