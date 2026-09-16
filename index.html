@@ -199,7 +199,11 @@ Amado Jesús, hoy quiero decirte que quiero seguirte, aun cuando el camino sea d
         <button class="popup-close" id="popupCloseIdx">&times;</button>
         <h2 class="popup-title">Predica - Iglesia</h2>
 
-        <div class="charla-carrusel" id="charlaCarruselIdx"></div>
+        <div class="charla-carrusel" id="charlaCarruselIdx">
+            <img src="./Charlas/igle/1.png" alt="Diapositiva 1" class="carrusel-img active">
+            <img src="./Charlas/igle/2.png" alt="Diapositiva 2" class="carrusel-img">
+            <img src="./Charlas/igle/3.png" alt="Diapositiva 3" class="carrusel-img">
+        </div>
 
         <div class="charla-audio">
             <button class="audio-play" id="audioPlayIdx">&#9654;</button>
@@ -290,27 +294,19 @@ btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth"
     const audioTiempo = document.getElementById('audioTiempoIdx');
     const audioTotal = document.getElementById('audioTotalIdx');
     const carrusel = document.getElementById('charlaCarruselIdx');
-    let imgs = carrusel.querySelectorAll('.carrusel-img');
+    let imgs = Array.from(carrusel.querySelectorAll('.carrusel-img'));
+    let indiceImg = 0;
+
+    imgs.forEach(img => {
+        img.onerror = function() {
+            this.remove();
+            imgs = Array.from(carrusel.querySelectorAll('.carrusel-img'));
+            if (indiceImg >= imgs.length) indiceImg = 0;
+        };
+    });
 
     const audio = new Audio('./Charlas/igle/29%2008%2026.mp3');
     let reproduciendo = false;
-    let indiceImg = 0;
-
-    fetch('/api/imagenes?carpeta=igle')
-        .then(r => r.json())
-        .then(rutas => {
-            carrusel.innerHTML = '';
-            rutas.forEach((ruta, i) => {
-                const img = document.createElement('img');
-                img.src = ruta;
-                img.alt = 'Diapositiva ' + (i + 1);
-                img.className = 'carrusel-img' + (i === 0 ? ' active' : '');
-                carrusel.appendChild(img);
-            });
-            imgs = carrusel.querySelectorAll('.carrusel-img');
-            indiceImg = 0;
-        })
-        .catch(() => {});
 
     function formato(s) {
         s = Math.floor(s) || 0;
