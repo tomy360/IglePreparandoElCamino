@@ -17,7 +17,7 @@ window.eventos = [
         detalles: [
             "Volver al pacto.",
             "Tiempo de reconexión, restauración y renovación!.",
-            "Agendá esta fecha: Domingo 7 de Junio, 11:00 hs.",
+            "Agendá esta fecha: Domingo 7 de Junio, 16:00 hs.",
             "Anotate con tu líder 😉"
         ],
         nota: "¡No pueden perderselo!",
@@ -49,11 +49,21 @@ window.eventos = [
         imagen: "./Imagenes/Eventos/Retiro_matri.jpeg",
         detalles: [
             "Se viene nuestro Retiro de Matrimonios, un tiempo especial para reencontrarnos, compartir y fortalecer nuestro vínculo.",
-            "Agendá esta fecha: domingo 27 de septiembre, 10:30 hs.",
+            "Agendá esta fecha: domingo 27 de septiembre, 16:00 hs.",
             "Un tiempo para volver a elegirnos y recordar que somos uno.",
             "Anotate con tu líder ❤️"
         ],
         nota: "¡Los esperamos!",
         fecha: "2026-09-27"
+    },
+
+        {
+        titulo: "Cambio de horario",
+        imagen: "./Imagenes/Eventos/Cambio_horario.jpg",
+        detalles: [
+            "Agendá el cambio: Domingo 27 de Junio, 20:00 hs.",
+        ],
+        nota: "No te confundas!",
+        fecha: "2026-06-27"
     }
 ];
