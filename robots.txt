@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iglesia-preparando-el-camino.vercel.app/sitemap.xml

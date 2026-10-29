@@ -89,7 +89,59 @@ function renderEventosTodos(id) {
 document.addEventListener("DOMContentLoaded", () => {
     renderEventosIndex("EventosEspecialesCont", 3);
     renderEventosTodos("NoticiasCont");
+    inyectarSchemaEventos();
 });
+
+// ============================================
+//  DATOS ESTRUCTURADOS (Schema.org - Event)
+// ============================================
+
+function horaDeEvento(evento) {
+    const texto = (evento.detalles || []).join(" ");
+    const match = texto.match(/(\d{1,2}):(\d{2})/);
+    if (!match) return "20:00:00-03:00";
+    return `${match[1].padStart(2, "0")}:${match[2]}:00-03:00`;
+}
+
+function inyectarSchemaEventos() {
+    const eventos = ordenarPorFecha(window.eventos || []).filter(ev => ev.fecha);
+    if (!eventos.length) return;
+
+    const grafo = {
+        "@context": "https://schema.org",
+        "@graph": eventos.map(ev => ({
+            "@type": "Event",
+            "name": ev.titulo,
+            "startDate": `${ev.fecha}T${horaDeEvento(ev)}`,
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "description": [ev.nota].concat(ev.detalles || []).filter(Boolean).join(" "),
+            "image": new URL(ev.imagen, window.location.href).href,
+            "url": window.location.href,
+            "location": {
+                "@type": "Place",
+                "name": "Iglesia Preparando El Camino",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Juan B. Alberdi 135",
+                    "addressLocality": "Guaymallén",
+                    "addressRegion": "Mendoza",
+                    "addressCountry": "AR"
+                }
+            },
+            "organizer": {
+                "@type": "Organization",
+                "name": "Iglesia Preparando El Camino",
+                "url": "https://iglesia-preparando-el-camino.vercel.app/"
+            }
+        }))
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(grafo);
+    document.head.appendChild(script);
+}
 
 // ============================================
 //  LIGHTBOX (zoom de imagen de noticias)

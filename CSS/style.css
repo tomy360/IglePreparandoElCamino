@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* Fuentes cargadas desde el <head> de cada página (preconnect + display=swap) */
 
 /* =====================
    BASE
@@ -31,6 +31,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+/* Subtítulos que antes eran <h3> y ahora son <p> (misma tipografía) */
+.TextP2, .TextP12 {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
 }
@@ -593,7 +599,7 @@ nav.nav-scrolled {
     margin-bottom: 8px;
 }
 
-.TituloHorario h2 {
+.TituloHorario h3 {
     margin: 0;
     font-size: 1.5rem;
 }
@@ -693,8 +699,8 @@ nav.nav-scrolled {
     margin-bottom: 10px;
 }
 
-.MinisterioIndi h2 { margin: 5px 0 8px; }
-.MinisterioIndi h3 { font-size: 16px; margin: 3px 0; font-weight: normal; }
+.MinisterioIndi h3 { font-size: 24px; margin: 5px 0 8px; }
+.MinisterioIndi .MinisterioSub { font-size: 16px; margin: 3px 0; font-weight: normal; }
 .MinisterioIndi p  { margin-top: 15px; line-height: 1.6; }
 
 .Visitanos {
@@ -1007,7 +1013,7 @@ nav.nav-scrolled {
     }
 
     .TituloHorario { justify-content: center; margin-bottom: 10px; }
-    .TituloHorario h2 { font-size: 1.4rem; }
+    .TituloHorario h3 { font-size: 1.4rem; }
     .LogoIndx { width: 48px; }
     .ContHorarios p { font-size: 14px; text-align: center; margin: 0 auto; }
 
