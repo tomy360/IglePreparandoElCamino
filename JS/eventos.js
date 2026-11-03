@@ -45,8 +45,8 @@ window.eventos = [
         fecha: "2026-05-01"
     },
         {
-        titulo: "Retiro de mujeres",
-        imagen: "./Imagenes/Eventos/RetiroMujeres.jpeg",
+        titulo: "Retiro de Matrimonios",
+        imagen: "./Imagenes/Eventos/Retiro_matri.jpeg",
         detalles: [
             "Se viene nuestro Retiro de Matrimonios, un tiempo especial para reencontrarnos, compartir y fortalecer nuestro vínculo.",
             "Agendá esta fecha: domingo 27 de septiembre, 16:00 hs.",
