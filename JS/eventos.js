@@ -46,7 +46,7 @@ window.eventos = [
     },
         {
         titulo: "Retiro de mujeres",
-        imagen: "./Imagenes/Eventos/Retiro_matri.jpeg",
+        imagen: "./Imagenes/Eventos/RetiroMujeres.jpeg",
         detalles: [
             "Se viene nuestro Retiro de Matrimonios, un tiempo especial para reencontrarnos, compartir y fortalecer nuestro vínculo.",
             "Agendá esta fecha: domingo 27 de septiembre, 16:00 hs.",
